@@ -15,7 +15,10 @@ KAMUS | INDONESIA-KAILI
             <div class="card-header">
                 <h4>Data Kata</h4>
                 <div class="card-header-action">
-                    <a class="btn btn-primary " href="javascript:void(0)" id="add">Tambah</a>
+                    <div class="d-flex justify-content-between">
+                        <a class="btn btn-primary " href="javascript:void(0)" id="add">Tambah</a>
+                        <a class="btn btn-secondary ml-1" href="javascript:void(0)" id="import">Import</a>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -93,6 +96,29 @@ KAMUS | INDONESIA-KAILI
         </div>
     </div>
 </div>
+
+<div id="import-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <form action="{{route('import')}}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modelheader">Import</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="" class="form-label">Excel</label>
+                        <input type="file" class="form-control" name="excel">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="batal" class="btn btn-danger" data-dismiss="modal">BATAL</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 @section('js')
 <script src="{{asset('template/node_modules/datatables/media/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('template/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -152,6 +178,10 @@ KAMUS | INDONESIA-KAILI
             $('#ItemForm').trigger("reset");
             $('#modelheader').html("Tambah Data Baru");
             $('#univModal').modal('show');
+        });
+
+        $('#import').click(function() {
+            $('#import-modal').modal('show');
         });
 
         $('body').on('click', '.editItem', function() {

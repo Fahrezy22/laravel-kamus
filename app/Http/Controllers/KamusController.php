@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ImportKata;
 use App\Models\Kata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class KamusController extends Controller
@@ -78,5 +80,29 @@ class KamusController extends Controller
         $data2 = DB::table('katas')->where([['indonesia', 'Like', "%$text%"], ['id', '!=', $result_id]])->get();
 
         return response()->json([$data, $data2]);
+    }
+
+    public function translate2()
+    {
+        $data = Kata::all();
+        return view('public.daerah')->with('data', $data);
+    }
+
+    public function search2(Request $request)
+    {
+        $text = $request->search;
+        $result = DB::table('katas')->where('daerah', 'Like', "$text")->first();
+        $result_id = $result->id;
+        $data = DB::table('katas')->where('daerah', 'Like', "$text")->first();
+        $data2 = DB::table('katas')->where([['daerah', 'Like', "%$text%"], ['id', '!=', $result_id]])->get();
+
+        return response()->json([$data, $data2]);
+    }
+
+    public function import(Request $request){
+
+        // dd($request->all());
+        Excel::import(new ImportKata, $request->file('excel'));
+        return redirect()->back();
     }
 }

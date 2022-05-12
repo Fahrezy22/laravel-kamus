@@ -29,7 +29,7 @@
         <div class="main-wrapper container">
             <div class="navbar-bg"></div>
             <nav class="navbar navbar-expand-lg main-navbar">
-                <a href="index.html" class="navbar-brand sidebar-gone-hide">KT Indonesia - Bugis</a>
+                <a href="index.html" class="navbar-brand sidebar-gone-hide">KT Bahasa Kaili</a>
                 <div class="navbar-nav">
                     <a href="#" class="nav-link sidebar-gone-show" data-toggle="sidebar"><i class="fas fa-bars"></i></a>
                 </div>
@@ -37,7 +37,6 @@
                     <a class="sidebar-gone-show nav-collapse-toggle nav-link" href="#">
                         <i class="fas fa-ellipsis-v"></i>
                     </a>
-                    @yield('nav')
                 </div>
                 <form class="form-inline ml-auto">
                 </form>
@@ -57,6 +56,14 @@
 
             <nav class="navbar navbar-secondary navbar-expand-lg">
                 <div class="container">
+                    <ul class="navbar-nav">
+                        <li class="nav-item {{ (request()->RouteIS('translate')) ? 'active' : '' }}">
+                          <a href="{{route('translate')}}" class="nav-link"><i class="far fa-clone"></i><span>Indonesia - Kaili</span></a>
+                        </li>
+                        <li class="nav-item {{ (request()->RouteIs('translate2')) ? 'active' : '' }}">
+                            <a href="{{route('translate2')}}" class="nav-link"><i class="far fa-clone"></i><span>Kaili - Indonesia</span></a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
 

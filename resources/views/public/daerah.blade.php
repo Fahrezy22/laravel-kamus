@@ -4,10 +4,10 @@
 <link rel="stylesheet" href="{{asset('template/node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css')}}">
 @endsection
 @section('headtittle')
-KAMUS | INDONESIA - KAILI
+KAMUS | KAILI - INDONESIA
 @endsection
 @section('explaintitle')
-Indonesia - Kaili
+Kaili - Indonesia
 @endsection
 @section('content')
 <div class="row">
@@ -24,7 +24,7 @@ Indonesia - Kaili
                             <select name="search" id="search" class="form-control select2">
                                 <option value="" selected></option>
                                 @foreach ($data as $d)
-                                    <option value="{{$d->indonesia}}">{{$d->indonesia}}</option>
+                                    <option value="{{$d->daerah}}">{{$d->daerah}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -89,22 +89,22 @@ Indonesia - Kaili
         $("#search").change(function () {
             var search = $('#search').val();
             $.ajax({
-                url: '{{route('search')}}',
+                url: '{{route('search2')}}',
                 data: {
                     'search': search
                 },
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    $('#translateIndo').val(data[0].indonesia);
-                    $('#translateDaerah').val(data[0].daerah);
+                    $('#translateIndo').val(data[0].daerah);
+                    $('#translateDaerah').val(data[0].indonesia);
                     $('#translateJenis').val(data[0].jenis);
                     var i = 0;
                     var table = '<table class="table style="border: none"" id="hasil-serupa"><thead><tr><th>Indonesia</th><th>Kaili</th><th>Jenis</th></tr></thead><tbody>';
                     $.each(data[1], function(i, item) {
                         table += ('<tr>');
-                        table += ('<td>' + item.indonesia + '</td>');
                         table += ('<td>' + item.daerah + '</td>');
+                        table += ('<td>' + item.indonesia + '</td>');
                         table += ('<td>' + item.jenis + '</td>');
                         table += ('</tr>');
                     });
