@@ -21,9 +21,9 @@ class KamusController extends Controller
             return datatables()->of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="#" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editItem">Edit</a>';
+                    $btn = '<button href="#" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-md editItem"><i class="fas fa-edit"></i></button>';
 
-                    $btn = $btn . ' <a href="#" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteItem">Delete</a>';
+                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger deleteItem"><i class="fas fa-trash"></i></a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -101,7 +101,6 @@ class KamusController extends Controller
 
     public function import(Request $request){
 
-        // dd($request->all());
         Excel::import(new ImportKata, $request->file('excel'));
         return redirect()->back();
     }

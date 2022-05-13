@@ -125,6 +125,7 @@ KAMUS | INDONESIA-KAILI
 <script src="{{asset('template/node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js')}}"></script>
 <script src="{{asset('template/assets/js/page/modules-datatables.js')}}"></script>
 <script src="{{asset('template/assets/js/page/modules-toastr.js')}}"></script>
+<script src="{{asset('template/node_modules/sweetalert/dist/sweetalert.min.js')}}"></script>
 <script>
     $(document).ready(function() {
         $('#example').DataTable({
